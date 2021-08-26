@@ -29,8 +29,7 @@ public class Selenium {
     }
 
     public static ChromeDriver openSite() {
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\user\\Desktop\\webdriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vasim\\Desktop\\webdriver.v92\\chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.aac.ac.il/");
@@ -40,8 +39,13 @@ public class Selenium {
     public static void findPersonalInfo(ChromeDriver driver) {
         WebElement menu = driver.findElement(By.id("menu-%d7%9b%d7%9c%d7%9c%d7%99"));
         List<WebElement> menuItems = menu.findElements(By.tagName("li"));
-        WebElement personalInfo = menuItems.get(Deff.PERSONAL_INFORMATION);
-        personalInfo.click();
+        for (WebElement currentWebElement : menuItems ) {
+            if (currentWebElement.getText().contains("מידע אישי")) {
+                currentWebElement.click();
+                break;
+            }
+        }
+
     }
     public static void typeStudentInformationAndLogin(ChromeDriver driver, Account userAccount) {
         WebElement userNameInput = driver.findElement(By.id("Ecom_User_ID"));
